@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reza Mirjahanian</title>
+    <link rel="stylesheet" type="text/css" href="dist/joint.min.css"/>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+<!DOCTYPE html>
+
+
+<!-- content -->
+<div id="myholder"></div>
+<pre>
+  <code id="input">
+   []
+  </code>
+</pre>
+<hr>
+<label for="totalWater">
+    Total Water:
+    <input id="totalWater" type="text" disabled="disabled" size="6" readonly="true" value="0"/>
+</label>
+<button id="refresh">Refresh</button>
+<!-- dependencies -->
+<script src="dist/jquery.js"></script>
+<script src="dist/lodash.js"></script>
+<script src="dist/backbone.js"></script>
+<script src="dist/joint.js"></script>
+<script src="src/js/lib-reza.js"></script>
+
+<!-- code -->
+<script type="text/javascript">
+    const grid = new Grid();
+    const draw = new DrawChart(grid)
+    const randomInput = new RandomGenerator(grid.GRID_WIDTH, grid.GRID_HEIGHT);
+    function run() {
+        const inputData = randomInput.getRandomArray();
+        const {totalWater} = draw.draw(inputData);
+        // const {totalWater} = draw.draw([0,1,0,2,1,0,1,3,2,1,2,1]);
+        $('#input').html(JSON.stringify(inputData));
+        $('#totalWater').val(totalWater);
+        console.log(totalWater)
+    }
+
+    $("#refresh").on("click", function () {
+        run();
+    });
+
+
+</script>
+</body>
+
+</html>
